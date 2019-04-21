@@ -1,0 +1,25 @@
+CMakeLists.txtでOpenCVを使う
+opencv cmake CMakeLists
+
+# 経緯
+
+
+Dlibの[webcamを使った顔検出のサンプル](http://dlib.net/webcam_face_pose_ex.cpp.html)を動かす際、CMakeLists.txtにてOpenCVを見つけさせたかった
+
+# 結論
+
+OpenCV以外の部分は省きます。
+ちなみにCMakeLists.txtの例は[dlibのexample/CMakeLists.txt](http://dlib.net/example/CMakeLists.txt.html)がわかりやすかったです。（自分はこれを見た）
+
+```CMake
+# OpenCVのパッケージを探させて
+find_package(OpenCV REQUIRED)
+# パッケージをインクルードさせて
+include_directories(${OpenCV_INCLUDE_DIRS})
+# ターゲットとリンクさせる
+target_link_libraries(wabcam_face_pose_ex ${OpenCV_LIBS})
+```
+
+`${OpenCV_INCLUDE_DIRS}`と`${OpenCV_LIBS}`は自動で生成されるようです。`find_package`のおかげということであってますか...?
+
+# 参考URL
